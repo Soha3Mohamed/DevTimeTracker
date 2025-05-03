@@ -16,7 +16,10 @@ namespace DevTimeTracker
         {
             Sessions = _sessions;
         }
+        public SessionStore()
+        {
 
+        }
         public void Add(Session session)
         {
             Sessions.Add(session);

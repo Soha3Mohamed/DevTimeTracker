@@ -1,4 +1,4 @@
-
+﻿
 
 # DevTimeTracker Question Log
 
@@ -102,3 +102,106 @@ i know it is easy question but it is a trap i fall into which means it deserves 
 
 **Next Action:**  
 well, implement the add, remove,... methods
+
+---
+
+## [Date: 2025-05-2]
+^^ today i will finish the session manager ^^
+##################################################################################
+SessionManager Layer (Logic Layer)
+
+This is the brain of the app. It talks to SessionStore and handles:
+
+Creating a new session (with user input or mocked)
+
+Ending a session
+
+Listing sessions with filters or sorting
+
+Summarizing stats
+
+⏳ Estimated Time: 1–2 days (because it connects everything and might need small refactoring as you test)
+
+#################################################################################
+
+
+*Question 1:*
+in removeSession method, with which attribute will i search if such a session exists?
+
+*What I Tried:*
+unique attribute is startTime but how could a user know it???
+
+*Answer I Found:*  
+
+
+*Next Action:*
+
+
+---
+*Question 2:*
+whose responsibility is validation and why?? is it the sessionManager or the console app?
+
+*What I Tried:*
+i think the session manager is responsible as the backend part(simulation)
+
+*Answer I Found:*  
+
+
+*Next Action:*
+
+---
+
+*Question 3:*
+how can manage starting and ending a session?
+
+*What I Tried:*
+i think of a shared session
+
+*Answer I Found:*  
+yes currentSession is shared and i don't add it to the sessionStore unitl endSession method is called
+don't forget to make it null
+
+*Next Action:*
+i want to make a method that is visually good to be like the window for the use to see which session he is in right now(anyone can forget something even if he did it, even genius ones!!)
+also seeing progress is a good thing
+
+---
+
+*Question 4:*
+should i keep project names in  list so that i can do operations like preventing duplicates or something??
+
+*What I Tried:*
+
+
+*Answer I Found:*  
+
+
+*Next Action:*
+
+---
+## [Date: 2025-05-3]
+
+*Question 1:*
+i was confused here because the right return type was session but what if i don't have a current one???
+
+*What I Tried:*
+i will let the user(console app) manages null checking
+
+*Answer I Found:*  
+i returned session? and let the null checking to the user because i am trying too stock to the rule: formatting is the front's responsibility. 
+
+*Next Action:*
+i will read about serialization and deserialization and how can i use them effectively in my project
+
+next time you get stuck with the same problem: 
+
+ASK YOURSELF:
+What is the type of data I want to return? Will that type always be consistent?”
+
+If the answer is “sometimes I return A, sometimes B,” that’s a signal you either:
+
+Need a consistent return type (e.g. always Session?)
+
+Or need to separate behavior: one method returns data, another handles output.
+
+---
