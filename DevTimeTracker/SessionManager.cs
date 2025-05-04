@@ -13,7 +13,7 @@ namespace DevTimeTracker
     {
         
         private readonly SessionStore _store;
-        Session currentSession = null;
+        private Session? currentSession = null;
         public SessionManager(SessionStore sessionStore)
         {
                 _store = sessionStore;
@@ -49,6 +49,7 @@ namespace DevTimeTracker
                 ProjectName = _projectName,
                 SessionType = _sessionType
             };
+            
         }
         public void EndSession()
         {
@@ -94,31 +95,25 @@ namespace DevTimeTracker
             TimeSpan totalDurations = TimeSpan.Zero;
             foreach(var session in sessions)
             {
-                totalDurations += session.EndTime- session.StartTime;
+                totalDurations += CalculateDurationForSession(session);
             }
             return totalDurations;
             //return $"Total time spent on '{projectName}': {totalDuration.TotalHours:F2} hours";
         }
 
-        public void CreateAlarm(DateTime _startTime, string _description, string _projectName, SessionType _sessionType, int noOfHours)
-        {
-           // TimeSpan duration = _startTime.AddHours(2)-;
-           currentSession.EndTime = DateTime.Now;
-            if(currentSession.EndTime == _startTime.AddHours(noOfHours))
+        
+            // TimeSpan duration = _startTime.AddHours(2)-;
+            public void CheckIfGoalReached(int noOfHours)
             {
-                Console.WriteLine($"you completed the {noOfHours} hours you promised to finish, congratulations");
-                currentSession = new Session
-                {
-                    StartTime = DateTime.Now,
-                    Description = _description,
-                    ProjectName = _projectName,
-                    SessionType = _sessionType
-                };
-                currentSession = null;
+                if (currentSession == null)
+                    return;
 
+                var elapsed = DateTime.Now - currentSession.StartTime;
+                if (elapsed.TotalHours >= noOfHours)
+                {
+                    Console.WriteLine($"Congratulations! You've worked for {noOfHours} hours.");
+                }
             }
-           
-        }
 
         public Session? ShowCurrentSession()
         {
@@ -130,6 +125,15 @@ namespace DevTimeTracker
             //}
             return currentSession;
         }
+
+        public List<string> GetAllProjectNames()
+        {
+            return _store.GetSessions()
+                         .Select(s => s.ProjectName)
+                         .Distinct()
+                         .ToList();
+        }
+
     }
 }
     
