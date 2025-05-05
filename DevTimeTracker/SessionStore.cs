@@ -9,7 +9,7 @@ namespace DevTimeTracker
 {
     //so the session store is just the database layer of the app. it has the list of sessions and it is
     //responsible for adding session, saving sessions, and getting them to other parts of the app
-    internal class SessionStore
+    public class SessionStore
     {
         private const string filePath = "sessions.json";
         private List<Session> sessions = new(); // -> syntactic sugar introduced in c# 9.0 to improve readability( as long as the type is declared at first not var because that is not allowed

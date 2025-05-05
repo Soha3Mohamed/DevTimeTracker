@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DevTimeTracker.Models
 {
-     enum SessionType
+     public enum SessionType
     {
         Learning,
         ProjectWork,
@@ -15,7 +15,7 @@ namespace DevTimeTracker.Models
         LightStudy,
         Other
     }
-     class Session
+     public class Session
     {
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
@@ -34,13 +34,21 @@ namespace DevTimeTracker.Models
         public Session()
         {
 
-        }  
+        }
         public override string ToString()
         {
-            //return base.ToString(); // this would give you namespace.className
-            return $"Session started at: {StartTime}\nEnded at: {EndTime}\n" +
-                   $"Project: {ProjectName}\nSession Type: {SessionType}\nDetails: {Description}";
+            string duration = EndTime != default
+                ? (EndTime - StartTime).ToString(@"hh\:mm\:ss")
+                : "In Progress";
+
+            return $"Session started at: {StartTime}\n" +
+                   $"Ended at: {(EndTime == default ? "..." : EndTime)}\n" +
+                   $"Duration: {duration}\n" +
+                   $"Project: {ProjectName}\n" +
+                   $"Session Type: {SessionType}\n" +
+                   $"Details: {Description}";
         }
+
     }
 
 }

@@ -9,7 +9,7 @@ namespace DevTimeTracker
 {
     //the session Manager is the business logic of the app. it is the one responsible for all operations on sessions like:
     //starting a session, ending it ,validating inputs, and making sure no two sessions are running at the same time,...
-    internal class SessionManager
+    public class SessionManager
     {
         
         private readonly SessionStore _store;
@@ -19,20 +19,6 @@ namespace DevTimeTracker
                 _store = sessionStore;
         }
         
-        //public void AddSession(DateTime _startTime, DateTime _endTime,string _description,string _projectName,SessionType _sessionType)
-        //{
-        //    if (currentSession != null)
-        //    {
-        //        Console.WriteLine("A session is already in progress.");
-        //        //in console app make the user chhose either he wants to end this session or not(should return info about that session or not??
-        //        return;
-        //    }
-
-        //    currentSession = new Session(_startTime,_endTime,_description,_sessionType,_projectName);
-        //    _store.Add(currentSession);
-        //    currentSession = null;
-        //}
-
 
         public void StartSession(DateTime _startTime, string _description, string _projectName, SessionType _sessionType)
         {
